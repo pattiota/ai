@@ -3,1044 +3,622 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAN-153 IT Security Essentials Syllabus</title>
+    <title>MIS427/527 Interactive Syllabus</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ffffff 0%, #f0f8f0 100%);
+            font-family: 'Arial', sans-serif;
+            background-color: white;
             color: #333;
             line-height: 1.6;
         }
-        
+
         .header {
-            background: linear-gradient(135deg, #2d5016 0%, #4a7c23 100%);
+            background: linear-gradient(135deg, #dc2626, #2563eb);
             color: white;
-            padding: 2rem 0;
+            padding: 2rem;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
+
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
-        .header p {
+
+        .header h2 {
             font-size: 1.2rem;
-            opacity: 0.9;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
         }
-        
-        .container {
+
+        .editable-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .edit-field {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .edit-field input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            min-width: 150px;
+        }
+
+        .edit-field input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .navigation {
+            background: #f8fafc;
+            padding: 1rem 2rem;
+            border-bottom: 3px solid #e5e7eb;
+        }
+
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background: linear-gradient(135deg, #dc2626, #2563eb);
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 300px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            z-index: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            top: 100%;
+            left: 0;
+            margin-top: 8px;
+        }
+
+        .dropdown-content a {
+            color: #374151;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .dropdown-content a:hover {
+            background: linear-gradient(90deg, #fef2f2, #eff6ff);
+            border-left-color: #dc2626;
+            color: #dc2626;
+        }
+
+        .nav-dropdown:hover .dropdown-content {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
-        
-        .navigation {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-        }
-        
-        .nav-controls {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        select, button {
-            padding: 0.8rem 1.2rem;
-            border: 2px solid #4a7c23;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        select {
-            background: white;
-            min-width: 200px;
-        }
-        
-        select:focus {
-            outline: none;
-            border-color: #2d5016;
-            box-shadow: 0 0 0 3px rgba(74, 124, 35, 0.1);
-        }
-        
-        button {
-            background: #4a7c23;
-            color: white;
-            cursor: pointer;
-            border: none;
-            font-weight: 600;
-        }
-        
-        button:hover {
-            background: #2d5016;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(74, 124, 35, 0.3);
-        }
-        
-        button.secondary {
-            background: #666;
-        }
-        
-        button.secondary:hover {
-            background: #333;
-        }
-        
-        .content-section {
+
+        .section {
+            display: none;
             background: white;
             border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .content-section:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-        
-        .section-header {
-            background: linear-gradient(135deg, #4a7c23 0%, #2d5016 100%);
-            color: white;
-            padding: 1.5rem;
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
-        
-        .section-content {
             padding: 2rem;
-        }
-        
-        .editable {
-            background: #f8fff8;
-            border: 2px dashed #4a7c23;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid transparent;
             transition: all 0.3s ease;
         }
-        
-        .editable:hover {
-            background: #f0f8f0;
-            border-color: #2d5016;
-        }
-        
-        .edit-mode .editable {
-            background: #fffacd;
-            border: 2px solid #ff6b35;
-            cursor: pointer;
-        }
-        
-        .edit-mode .editable:hover {
-            background: #fff8dc;
-            transform: scale(1.02);
-        }
-        
-        input, textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-        
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: #4a7c23;
-            box-shadow: 0 0 0 3px rgba(74, 124, 35, 0.1);
-        }
-        
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-        
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-        
-        .info-item {
-            background: #f8fff8;
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid #4a7c23;
-        }
-        
-        .info-item strong {
-            color: #2d5016;
+
+        .section.active {
             display: block;
-            margin-bottom: 0.5rem;
+            border-left-color: #dc2626;
         }
-        
-        .schedule-table {
+
+        .section h2 {
+            color: #dc2626;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .section h3 {
+            color: #2563eb;
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.8rem 0;
+        }
+
+        .section p, .section li {
+            margin-bottom: 0.8rem;
+        }
+
+        .section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .grade-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 1rem 0;
+            background: white;
             border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        
-        .schedule-table th {
-            background: #2d5016;
-            color: white;
-            padding: 1rem;
+
+        .grade-table th, .grade-table td {
+            padding: 12px;
             text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .grade-table th {
+            background: linear-gradient(135deg, #dc2626, #2563eb);
+            color: white;
             font-weight: 600;
         }
-        
-        .schedule-table td {
+
+        .grade-table tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fef2f2, #eff6ff);
             padding: 1rem;
-            border-bottom: 1px solid #eee;
-            background: white;
-        }
-        
-        .schedule-table tr:nth-child(even) td {
-            background: #f8fff8;
-        }
-        
-        .schedule-table tr:hover td {
-            background: #f0f8f0;
-        }
-        
-        .grade-breakdown {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .grade-item {
-            background: linear-gradient(135deg, #4a7c23 0%, #2d5016 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(74, 124, 35, 0.3);
-        }
-        
-        .grade-item h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .grade-item .percentage {
-            font-size: 2rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        .edit-indicator {
-            background: #ff6b35;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-left: 1rem;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-        
-        .save-changes {
-            background: #28a745;
-            margin-top: 1rem;
-        }
-        
-        .save-changes:hover {
-            background: #218838;
-        }
-        
-        .download-instructions {
-            background: #e8f5e8;
-            border: 2px solid #4a7c23;
             border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            text-align: center;
+            border-left: 4px solid #dc2626;
+            margin: 1rem 0;
         }
-        
-        .download-instructions h3 {
-            color: #2d5016;
-            margin-bottom: 0.5rem;
+
+        .contact-info {
+            background: linear-gradient(135deg, #f8fafc, #fefefe);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+            margin-bottom: 1rem;
         }
-        
+
+        .instructor-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .ai-policy {
+            background: linear-gradient(135deg, #fffbeb, #f0f9ff);
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .policy-warning {
+            background: linear-gradient(135deg, #fef2f2, #fdf2f8);
+            border: 2px solid #dc2626;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
             }
             
-            .nav-controls {
+            .editable-info {
                 flex-direction: column;
-                align-items: stretch;
+                gap: 1rem;
             }
             
-            select, button {
-                width: 100%;
+            .content {
+                padding: 1rem;
             }
             
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .grade-breakdown {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media print {
-            .navigation, .edit-indicator, button, .download-instructions {
-                display: none !important;
-            }
-            
-            .content-section {
-                page-break-inside: avoid;
-                margin-bottom: 20px;
-            }
-            
-            .header {
-                background: #2d5016 !important;
-                color: white !important;
-                -webkit-print-color-adjust: exact;
-            }
-            
-            body {
-                background: white !important;
+            .dropdown-content {
+                min-width: 250px;
             }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>LAN-153: IT Security Essentials (Security+)</h1>
-        <p>Moraine Valley Community College - Fall 2025</p>
+        <h1>MIS 427/527</h1>
+        <h2>The University of Arizona Eller College of Management</h2>
+        <div class="editable-info">
+            <div class="edit-field">
+                <span>📧 Instructor:</span>
+                <input type="text" id="instructor" placeholder="Enter instructor name" value="Patti Ota">
+            </div>
+            <div class="edit-field">
+                <span>📅 Year:</span>
+                <input type="text" id="year" placeholder="Enter year" value="Fall 2025">
+            </div>
+        </div>
     </div>
 
-    <div class="container">
-        <div class="download-instructions">
-            <h3>📥 Download Instructions</h3>
-            <p>To save this syllabus: Right-click this page → "Save as..." → Choose "Web Page, Complete" → Save as "LAN153_Syllabus.html"</p>
-        </div>
-
-        <div class="navigation">
-            <div class="nav-controls">
-                <select id="sectionSelect">
-                    <option value="">Select Section</option>
-                    <option value="instructor">Instructor Information</option>
-                    <option value="course">Course Information</option>
-                    <option value="schedule">Course Schedule</option>
-                    <option value="assignments">Assignments & Grading</option>
-                    <option value="policies">Policies & Procedures</option>
-                </select>
-                <button onclick="toggleEditMode()">
-                    <span id="editModeText">Enable Edit Mode</span>
-                </button>
-                <button onclick="showAllSections()" class="secondary">Show All Sections</button>
-                <button onclick="exportSyllabusData()" class="secondary">Export Data</button>
-                <button onclick="window.print()" class="secondary">Print Syllabus</button>
-                <span id="editIndicator" class="edit-indicator hidden">EDIT MODE ACTIVE</span>
+    <div class="navigation">
+        <div class="nav-dropdown">
+            <button class="dropdown-btn">
+                📋 Navigate Syllabus ▼
+            </button>
+            <div class="dropdown-content">
+                <a href="#" onclick="showSection('overview')">Course Description</a>
+                <a href="#" onclick="showSection('outcomes')">Learning Outcomes</a>
+                <a href="#" onclick="showSection('coursework')">Course Work</a>
+                <a href="#" onclick="showSection('grading')">Grading</a>
+                <a href="#" onclick="showSection('ai-policy')">AI Policy</a>
+                <a href="#" onclick="showSection('policies')">University Policies</a>
+                <a href="#" onclick="showSection('contact')">Instructor Information</a>
             </div>
         </div>
+    </div>
 
-        <!-- Instructor Information Section -->
-        <div id="instructor" class="content-section">
-            <div class="section-header">
-                Part 1: Instructor and Section Information
+    <div class="content">
+        <div id="overview" class="section active">
+            <h2>Course Description</h2>
+            <p>This course will explore the best consulting practices around project management of large-scale business software systems, such as ERP systems. It will examine the role of consultants in mitigating the risks involved in such implementations.</p>
+            
+            <div class="highlight">
+                <h3>What You'll Learn</h3>
+                <p>ERP systems are comprehensive applications that support and connect all aspects of an organization's business processes including Accounting, Human Resources, Supply-Chain Management, Marketing, Manufacturing, etc.</p>
             </div>
-            <div class="section-content">
-                <div class="info-grid">
-                    <div class="info-item editable" data-field="instructor-name">
-                        <strong>Instructor:</strong>
-                        <span class="content">Dr. John Sands</span>
-                    </div>
-                    <div class="info-item editable" data-field="office-location">
-                        <strong>Office Location:</strong>
-                        <span class="content">T518</span>
-                    </div>
-                    <div class="info-item editable" data-field="office-hours">
-                        <strong>Office Hours:</strong>
-                        <span class="content">Mon 5PM, Tues 12PM, Wed 12PM, Thur 6PM</span>
-                    </div>
-                    <div class="info-item editable" data-field="phone">
-                        <strong>Office Phone:</strong>
-                        <span class="content">708-974-5426</span>
-                    </div>
-                    <div class="info-item editable" data-field="email">
-                        <strong>Email:</strong>
-                        <span class="content">sands@morainevalley.edu</span>
-                    </div>
-                    <div class="info-item editable" data-field="semester">
-                        <strong>Semester:</strong>
-                        <span class="content">Fall 2025</span>
-                    </div>
-                    <div class="info-item editable" data-field="section">
-                        <strong>Section:</strong>
-                        <span class="content">LAN153-300</span>
-                    </div>
-                    <div class="info-item editable" data-field="room">
-                        <strong>Room:</strong>
-                        <span class="content">Online</span>
-                    </div>
-                    <div class="info-item editable" data-field="meeting-time">
-                        <strong>Meeting Time:</strong>
-                        <span class="content">Saturday</span>
-                    </div>
-                    <div class="info-item editable" data-field="start-date">
-                        <strong>First Day of Class:</strong>
-                        <span class="content">8/18/2025</span>
-                    </div>
-                    <div class="info-item editable" data-field="end-date">
-                        <strong>Last Day of Class:</strong>
-                        <span class="content">10/10/2025</span>
-                    </div>
-                    <div class="info-item editable" data-field="final-exam">
-                        <strong>Final Exam Date:</strong>
-                        <span class="content">10/06/2025</span>
-                    </div>
-                </div>
+
+            <h3>Course Focus</h3>
+            <p>Students will study actual, present-day ERP implementations and hear from consultants who have been involved in this type of work. Topics will include:</p>
+            <ul>
+                <li>The project life cycle</li>
+                <li>Project management</li>
+                <li>Implementation methodologies</li>
+                <li>Change management</li>
+                <li>Analytics</li>
+                <li>How businesses use Generative AI</li>
+                <li>How consultants impact the implementation process</li>
+            </ul>
+
+            <h3>Current Technology Trends</h3>
+            <p>Current trends in technology will be explored, such as:</p>
+            <ul>
+                <li>Distributed cloud providers</li>
+                <li>Generative AI</li>
+                <li>Personalization</li>
+                <li>Digital identity</li>
+            </ul>
+
+            <h3>Hands-On Experience</h3>
+            <p>Students will have the opportunity to work in teams to explore a current project and produce a critical consultant ERP report.</p>
+
+            <div class="highlight">
+                <h3>Course Materials</h3>
+                <p>Course materials will be available directly on <strong>D2L</strong>.</p>
             </div>
+
+            <h3>Modality</h3>
+            <p>This course will be delivered using <strong>in-person</strong> modality.</p>
         </div>
 
-        <!-- Course Information Section -->
-        <div id="course" class="content-section">
-            <div class="section-header">
-                Part 2: Course Information
-            </div>
-            <div class="section-content">
-                <h3>Course Identification</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <strong>Course Number:</strong> LAN-153
-                    </div>
-                    <div class="info-item">
-                        <strong>Course Title:</strong> IT Security Essentials (Security+)
-                    </div>
-                    <div class="info-item">
-                        <strong>Credit Hours:</strong> 3
-                    </div>
-                    <div class="info-item">
-                        <strong>Contact Hours:</strong> 4 (2 Lecture/Demo + 2 Lab/Studio)
-                    </div>
-                    <div class="info-item">
-                        <strong>Prerequisite:</strong> LAN-122 or consent of instructor
-                    </div>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Course Description</h3>
-                <p>This course introduces the basic principles of network security. Students will be introduced to computer network vulnerabilities and threats and how to safeguard computer networks from those vulnerabilities and threats. This course will expose students to network security planning, network security technology, network security organization and the legal and ethical issues associated with network security. This course is designed to prepare successful students for the CompTIA Security+ certification.</p>
-
-                <h3 style="margin-top: 2rem;">Major Course Concepts</h3>
-                <div style="margin-top: 1rem;">
-                    <h4 style="color: #2d5016; margin-bottom: 0.5rem;">A. Network Security Basics</h4>
-                    <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
-                        <li>Security Definitions, Network security principles and objectives</li>
-                        <li>Network security architecture, model, and layers</li>
-                        <li>Network threats, confidentiality, integrity and availability</li>
-                        <li>Accountability, auditability, and non-repudiation</li>
-                    </ul>
-
-                    <h4 style="color: #2d5016; margin-bottom: 0.5rem;">B. Network Security Planning</h4>
-                    <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
-                        <li>Network risk management and network security policy</li>
-                        <li>Continuity of operations and security maintenance</li>
-                        <li>Policy, procedures, standards, and guidelines</li>
-                    </ul>
-
-                    <h4 style="color: #2d5016; margin-bottom: 0.5rem;">C. Network Security Technology</h4>
-                    <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
-                        <li>Cryptography, virtual private networks, firewalls and intrusion detection systems</li>
-                        <li>Scanning and analysis tools and access controls</li>
-                    </ul>
-
-                    <h4 style="color: #2d5016; margin-bottom: 0.5rem;">D. Network Security Organization</h4>
-                    <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
-                        <li>The organization and security</li>
-                        <li>Personnel and security</li>
-                        <li>The Computer Incident Response Team (CIRT)</li>
-                    </ul>
-
-                    <h4 style="color: #2d5016; margin-bottom: 0.5rem;">E. Legal, Privacy, and Ethical Issues</h4>
-                    <ul style="margin-left: 1.5rem;">
-                        <li>US Laws and Network Security</li>
-                        <li>Privacy and network security</li>
-                        <li>Ethics and Network Security</li>
-                    </ul>
-                </div>
-            </div>
+        <div id="outcomes" class="section">
+            <h2>Learning Outcomes</h2>
+            <p>By the end of this course, students will achieve the following learning outcomes:</p>
+            
+            <ul>
+                <li><strong>Understand the role of consultants</strong> in the implementation process of large-scale business software systems</li>
+                <li><strong>Practice active listening, reading, and recording</strong> of key information in a clear, concise, and organized way</li>
+                <li><strong>Develop a practical understanding</strong> of the degree to which businesses and organizations benefit from and rely upon ERP systems to understand and manage their operations</li>
+                <li><strong>Understand overall technology trends</strong> that are affecting the opportunities, strategies, and technologies that will drive new plans for enterprise management</li>
+                <li><strong>Develop real-world experience</strong> solving a current business problem</li>
+            </ul>
         </div>
 
-        <!-- Course Schedule Section -->
-        <div id="schedule" class="content-section">
-            <div class="section-header">
-                Part 3: Course Schedule
+        <div id="coursework" class="section">
+            <h2>Course Work</h2>
+            
+            <h3>Class Participation</h3>
+            <p>In-class discussions on the presentations and readings are significant aspects of the class. Individual participation will be evaluated in terms of voluntary, courteous contribution of ideas; thoughtful questions; and demonstration of critical thinking skills.</p>
+
+            <h3>Class Summary Memos</h3>
+            <div class="highlight">
+                <p>Consultants deal with large volumes of information—client meetings, interviews, workshops, documents. Good note-taking ensures critical points aren't missed. A good summary helps everyone focus on what's essential—key issues, decisions, next steps—without getting lost in the weeds.</p>
             </div>
-            <div class="section-content">
-                <div class="editable" data-field="schedule-content">
-                    <table class="schedule-table">
-                        <thead>
-                            <tr>
-                                <th>Week</th>
-                                <th>Domain/Topic</th>
-                                <th>Labs & Exercises</th>
-                                <th>Assessment</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Week 1</strong></td>
-                                <td>Domain 1 - General Security Concepts</td>
-                                <td>Lab 01A: Malware Analysis<br>Lab 01B: Cryptography Concepts<br>Exercise 1: Cybersecurity Controls</td>
-                                <td>Exam 1: Domain 1</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Week 2</strong></td>
-                                <td>Domain 2 - Threats, Vulnerabilities, and Mitigations (22%)</td>
-                                <td>Lab 02A: Password Cracking<br>Lab 02B: TBD<br>Exercise 2: Hashing Tools</td>
-                                <td>Exam 2: Domain 2</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Week 3</strong></td>
-                                <td>Domain 3 - Security Architecture (18%)</td>
-                                <td>Lab 03A: ARP Poisoning Investigation<br>Lab 03B: Command Line Tools<br>Exercise 3: NIST SP800-171</td>
-                                <td>Exam 3: Domain 3</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Week 4</strong></td>
-                                <td>Domain 4 - Security Operations Part 1 (28%)</td>
-                                <td>Lab 04: Active Reconnaissance<br>Exercise 4: Asset Inventory Report</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Week 5</strong></td>
-                                <td>Domain 4 - Security Operations Part 2 (28%)</td>
-                                <td>Lab 05A: Network Traffic Capture<br>Lab 05B: Intrusion Detection<br>Exercise 5: Access Control Matrix</td>
-                                <td>Exam 4: Domain 4</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Week 6</strong></td>
-                                <td>Domain 5 - Security Program Management Part 1 (20%)</td>
-                                <td>Lab 06: Wireless Security<br>Exercise 6: Vulnerability Scan Reports</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Week 7</strong></td>
-                                <td>Domain 5 - Security Program Management Part 2 (20%)</td>
-                                <td>Lab 07: Protocol Implementation<br>Exercise 7: Incident Response Plan</td>
-                                <td>Exam 5: Domain 5</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Week 8</strong></td>
-                                <td>Final Assessments</td>
-                                <td>Final Project</td>
-                                <td>Final Comprehensive Exam</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <p>The Summary Memos help students develop their note-taking and summarizing skills.</p>
+
+            <h3>Short Presentations</h3>
+            <p>Throughout the semester, students will be asked to prepare short presentations/summaries about course-related topics. These presentations will be evaluated in terms of clarity of ideas, accuracy, organization, and thoughtful responses to follow-up questions.</p>
+
+            <h3>Major Group Presentation</h3>
+            <p>There are two main reasons for in-class presentations: sharing what you have learned with your classmates for their educational benefit and equipping you to make strong and effective presentations to others in the "real world" when you need to.</p>
+            
+            <div class="highlight">
+                <h4>Presentation Requirements:</h4>
+                <ul>
+                    <li>Groups will identify a topic about an emerging technology (instructor approved)</li>
+                    <li>30-45 minutes in length</li>
+                    <li>Professional in-class presentation</li>
+                    <li>Share information with the entire class</li>
+                </ul>
+            </div>
+
+            <p>Presentations will be evaluated in terms of technical content, organization, quality of presentation materials (PowerPoint slides), coordination and clear delineation of responsibilities, and handouts.</p>
+
+            <h3>Group Project</h3>
+            <p>This course includes a group project regarding a forward-thinking technology project.</p>
+            
+            <div class="highlight">
+                <h4>Project Requirements:</h4>
+                <ul>
+                    <li><strong>Written report:</strong> Minimum length of 12 pages</li>
+                    <li><strong>References:</strong> At least 3 references with appropriate citations in MLA or APA format</li>
+                    <li><strong>Due Date:</strong> December 5th, 2025</li>
+                </ul>
+            </div>
+
+            <p>Projects will be evaluated in terms of document components (Executive Summary, Body (heft, depth, style), Syntax (grammar, voice consistency), References and Evidence Cited, and other criteria such as did authors get the point of the assignment and did they demonstrate an understanding of ERP systems.</p>
+
+            <h3>White Paper (MIS 527 Students Only)</h3>
+            <div class="highlight">
+                <p>A "white paper" on an approved ERP topic of at least <strong>2000 words</strong> with word count. A white paper is an authoritative report or guide that informs readers concisely about a complex issue and presents the issuing body's philosophy on the matter.</p>
+            </div>
+            
+            <p><strong>Requirements:</strong></p>
+            <ul>
+                <li>At least 3 non-AI references with appropriate citations in MLA or APA format</li>
+                <li>Due December 5th, 2025</li>
+            </ul>
+
+            <h3>Final Examination</h3>
+            <p><strong>Oral final examination</strong> will be conducted during the last week of classes. This exam format provides the opportunity to better assess the understanding of course material including information covered in class presentations, discussions, and group projects.</p>
+        </div>
+
+        <div id="grading" class="section">
+            <h2>Grading</h2>
+            <p>Your final grade will be comprised upon the following work elements:</p>
+            
+            <table class="grade-table">
+                <thead>
+                    <tr>
+                        <th>Assignment</th>
+                        <th>Points</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Voluntary In-Class Participation</td>
+                        <td>15</td>
+                        <td>Active engagement in discussions</td>
+                    </tr>
+                    <tr>
+                        <td>Short Presentations</td>
+                        <td>10</td>
+                        <td>Course-related topic presentations</td>
+                    </tr>
+                    <tr>
+                        <td>Summary Memos</td>
+                        <td>10</td>
+                        <td>Note-taking and summarizing exercises</td>
+                    </tr>
+                    <tr>
+                        <td>Major Group Presentation</td>
+                        <td>25</td>
+                        <td>30-45 minute professional presentation</td>
+                    </tr>
+                    <tr>
+                        <td>Group Project</td>
+                        <td>25</td>
+                        <td>12-page written report on technology project</td>
+                    </tr>
+                    <tr>
+                        <td>Oral Final Examination</td>
+                        <td>15</td>
+                        <td>Comprehensive oral exam</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>MIS 427 Grading Scale</h3>
+            <div class="highlight">
+                <p><strong>Total Points Available:</strong> 100</p>
+                <ul>
+                    <li><strong>A:</strong> 90-100 points</li>
+                    <li><strong>B:</strong> 80-89 points</li>
+                    <li><strong>C:</strong> 70-79 points</li>
+                    <li><strong>D:</strong> 60-69 points</li>
+                    <li><strong>E:</strong> < 60 points</li>
+                </ul>
+            </div>
+
+            <h3>MIS 527 Grading Scale</h3>
+            <div class="highlight">
+                <p><strong>Total Points Available:</strong> 120 (includes 20 points for White Paper)</p>
+                <ul>
+                    <li><strong>A:</strong> 108-120 points</li>
+                    <li><strong>B:</strong> 96-107 points</li>
+                    <li><strong>C:</strong> 84-95 points</li>
+                    <li><strong>D:</strong> 72-83 points</li>
+                    <li><strong>E:</strong> < 72 points</li>
+                </ul>
             </div>
         </div>
 
-        <!-- Assignments & Grading Section -->
-        <div id="assignments" class="content-section">
-            <div class="section-header">
-                Part 4: Assignments & Grading
-            </div>
-            <div class="section-content">
-                <h3>Grade Distribution</h3>
-                <div class="grade-breakdown editable" data-field="grade-distribution">
-                    <div class="grade-item">
-                        <h4>Labs</h4>
-                        <div class="percentage">50%</div>
-                        <p>(10 Labs Total)</p>
-                    </div>
-                    <div class="grade-item">
-                        <h4>Exercises</h4>
-                        <div class="percentage">15%</div>
-                        <p>(7 Exercises Total)</p>
-                    </div>
-                    <div class="grade-item">
-                        <h4>Major Tests</h4>
-                        <div class="percentage">25%</div>
-                        <p>(5 Domain Exams)</p>
-                    </div>
-                    <div class="grade-item">
-                        <h4>Final Exam</h4>
-                        <div class="percentage">10%</div>
-                        <p>(Comprehensive)</p>
-                    </div>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Grading Scale</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <strong>A:</strong> 92-100%
-                    </div>
-                    <div class="info-item">
-                        <strong>B:</strong> 85-91%
-                    </div>
-                    <div class="info-item">
-                        <strong>C:</strong> 77-84%
-                    </div>
-                    <div class="info-item">
-                        <strong>D:</strong> 70-76%
-                    </div>
-                    <div class="info-item">
-                        <strong>F:</strong> Below 70%
-                    </div>
-                </div>
-
-                <div class="editable" data-field="assignment-policies" style="margin-top: 2rem;">
-                    <h3>Assignment Policies</h3>
-                    <ul style="margin-left: 1.5rem; margin-top: 1rem;">
-                        <li><strong>Make-up Policy:</strong> No makeup assignments unless otherwise indicated by the instructor</li>
-                        <li><strong>Extra Credit:</strong> No extra credit assignments available in this class</li>
-                        <li><strong>Late Work:</strong> Contact instructor for late submission policies</li>
-                    </ul>
-                </div>
+        <div id="ai-policy" class="section">
+            <h2>AI Policy</h2>
+            
+            <div class="ai-policy">
+                <h3>🤖 Responsible AI Usage</h3>
+                <p>Using AI responsibly means that you can use AI tools, like ChatGPT, to help generate ideas or clarify concepts. <strong>AI is a support tool, not a substitute for your own work.</strong></p>
+                
+                <h4>Guidelines:</h4>
+                <ul>
+                    <li>AI can be used to help generate ideas or clarify concepts</li>
+                    <li>Submissions that appear to be copied from AI with little modification or without proper citation may result in reduced or no credit</li>
+                    <li>AI is a tool, not a teacher</li>
+                    <li>You still need to actively think, experiment, and reflect to truly learn</li>
+                </ul>
+                
+                <p><strong>Remember:</strong> It's super powerful, but you still need to actively think, experiment, and reflect to truly learn. If you have any questions/doubts about this policy, please ask.</p>
             </div>
         </div>
 
-        <!-- Policies & Procedures Section -->
-        <div id="policies" class="content-section">
-            <div class="section-header">
-                Part 5: Policies & Procedures
+        <div id="policies" class="section">
+            <h2>University Policies</h2>
+            
+            <h3>Academic Integrity</h3>
+            <div class="policy-warning">
+                <p>Students assume full responsibility for the content and integrity of the academic work they submit. The guiding principle of academic integrity shall be that all submitted work including assignments, examinations, reports, projects, etc. must be that student's own work alone, unless clearly following the rules for allowable group work.</p>
             </div>
-            <div class="section-content">
-                <h3>Attendance Policy</h3>
-                <p>Attendance is expected and required. Instructors have the authority to assign points to student attendance and participation. Excessive absence can affect final grade.</p>
 
-                <h3 style="margin-top: 2rem;">Academic Integrity</h3>
-                <p>Cheating and plagiarism are not allowed in this class. Any student caught in the act of cheating/plagiarism will be disciplined based on the severity of the offense up to and including immediate dismissal from class and may result in a grade of "F" in the course.</p>
+            <p>Students shall be guilty of violating the Code and be subject to proceedings under it if they cheat, fabricate, plagiarize, and represent others work as their own. You are responsible for reading and understanding the College's and University's policy at <a href="https://academicaffairs.arizona.edu/syllabus-policies" target="_blank">https://academicaffairs.arizona.edu/syllabus-policies</a>.</p>
 
-                <h3 style="margin-top: 2rem;">Code of Student Conduct</h3>
-                <p>Each student is responsible for adhering to the Code of Student Conduct as stated in the college catalog.</p>
+            <h4>Potential Penalties for Academic Dishonesty:</h4>
+            <ul>
+                <li>A failing grade for the entire assessment item without the option of make-up or replacement</li>
+                <li>A letter grade drop in the final class grade</li>
+                <li>A failing grade for the entire course</li>
+            </ul>
 
-                <h3 style="margin-top: 2rem;">Cautionary Statement</h3>
-                <p>Students with an impaired ability to concentrate may risk jeopardizing safety in the classroom for themselves, their classmates and their instructor. If your ability to concentrate is impaired you should discuss this matter with your instructor prior to operating equipment or performing a laboratory procedure.</p>
+            <p>The course instructor makes the final penalty determination. In case of any accusations of academic dishonesty, the student case may be forwarded to the Office of the Dean of Students.</p>
 
-                <h3 style="margin-top: 2rem;">Required Materials</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <strong>Textbook:</strong> Provided by instructor
-                    </div>
-                    <div class="info-item">
-                        <strong>Optional:</strong> CompTIA Security+ Certification Kit: Exam SY0-701
-                    </div>
-                    <div class="info-item">
-                        <strong>Documentation Style:</strong> MLA and APA accepted
-                    </div>
-                </div>
+            <h3>Behavior in the Course</h3>
+            <p>Students are expected to observe the University's Student Code of Conduct as it pertains to classroom behavior and should be familiar with University policies against threatening behavior by students (see <a href="http://policy.web.arizona.edu/~policy/threaten.shtml" target="_blank">http://policy.web.arizona.edu/~policy/threaten.shtml</a>). These policies also apply to all online interactions through the University system (including all features of Brightspace).</p>
+
+            <h3>Students with Disabilities</h3>
+            <div class="highlight">
+                <p>If you anticipate the need for reasonable accommodations to meet the requirements of this course, you must register with the Disability Resource Center and request that the DRC send me official notification of your accommodation needs as soon as possible. Please plan to meet with me to discuss accommodations and how my course requirements and activities may affect your ability to fully participate.</p>
+            </div>
+
+            <div class="policy-warning">
+                <h3>⚠️ Important Notice</h3>
+                <p>The instructor reserves the right to make changes to this syllabus as the course unfolds.</p>
+            </div>
+        </div>
+
+        <div id="contact" class="section">
+            <h2>Instructor Information</h2>
+            
+            <div class="instructor-card">
+                <h3>Primary Instructor</h3>
+                <p><strong>Name:</strong> <span id="instructor-display">Patti Ota</span><br>
+                <strong>Phone:</strong> (520) 850-0989<br>
+                <strong>Email:</strong> <a href="mailto:ota@arizona.edu">ota@arizona.edu</a></p>
+            </div>
+
+            <div class="instructor-card">
+                <h3>Co-Instructor</h3>
+                <p><strong>Name:</strong> Walt Zipperman<br>
+                <strong>Title:</strong> Former Chair of the Eller College of Management Board of Advisors<br>
+                <strong>Email:</strong> <a href="mailto:walt.zipperman@outlook.com">walt.zipperman@outlook.com</a></p>
+            </div>
+
+            <div class="contact-info">
+                <h3>Course Information</h3>
+                <p><strong>Course:</strong> MIS 427/527<br>
+                <strong>Semester:</strong> <span id="year-display">Fall 2025</span><br>
+                <strong>Format:</strong> In-Person<br>
+                <strong>Institution:</strong> The University of Arizona Eller College of Management</p>
+
+                <h3>Course Materials</h3>
+                <p><strong>Platform:</strong> D2L (Desire2Learn)<br>
+                <strong>Access:</strong> All course materials will be available directly on D2L</p>
             </div>
         </div>
     </div>
 
     <script>
-        let editMode = false;
-        const syllabusData = {};
-
-        // Initialize event listeners
-        document.getElementById('sectionSelect').addEventListener('change', function() {
-            const selectedSection = this.value;
-            if (selectedSection) {
-                showSection(selectedSection);
-            }
-        });
-
         function showSection(sectionId) {
             // Hide all sections
-            const sections = document.querySelectorAll('.content-section');
+            const sections = document.querySelectorAll('.section');
             sections.forEach(section => {
-                section.classList.add('hidden');
+                section.classList.remove('active');
             });
-
-            // Show selected section
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.classList.remove('hidden');
-                targetSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        function showAllSections() {
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(section => {
-                section.classList.remove('hidden');
-            });
-            document.getElementById('sectionSelect').value = '';
-        }
-
-        function toggleEditMode() {
-            editMode = !editMode;
-            const body = document.body;
-            const editModeText = document.getElementById('editModeText');
-            const editIndicator = document.getElementById('editIndicator');
-
-            if (editMode) {
-                body.classList.add('edit-mode');
-                editModeText.textContent = 'Exit Edit Mode';
-                editIndicator.classList.remove('hidden');
-                setupEditableElements();
-            } else {
-                body.classList.remove('edit-mode');
-                editModeText.textContent = 'Enable Edit Mode';
-                editIndicator.classList.add('hidden');
-                removeEditableElements();
-            }
-        }
-
-        function setupEditableElements() {
-            const editables = document.querySelectorAll('.editable');
-            editables.forEach(element => {
-                element.addEventListener('click', makeEditable);
-                element.title = 'Click to edit this section';
-            });
-        }
-
-        function removeEditableElements() {
-            const editables = document.querySelectorAll('.editable');
-            editables.forEach(element => {
-                element.removeEventListener('click', makeEditable);
-                element.title = '';
-            });
-        }
-
-        function makeEditable(event) {
-            if (!editMode) return;
-
-            const element = event.currentTarget;
-            const field = element.dataset.field;
             
-            if (field === 'schedule-content') {
-                editScheduleTable(element);
-            } else if (field === 'grade-distribution') {
-                editGradeDistribution(element);
-            } else if (field === 'assignment-policies') {
-                editAssignmentPolicies(element);
-            } else {
-                editSimpleField(element, field);
-            }
-        }
-
-        function editScheduleTable(element) {
-            const table = element.querySelector('.schedule-table tbody');
-            if (!table) return;
-
-            const rows = table.querySelectorAll('tr');
-            rows.forEach((row, index) => {
-                const cells = row.querySelectorAll('td');
-                cells.forEach((cell, cellIndex) => {
-                    if (cellIndex > 0) { // Skip week number column
-                        const currentValue = cell.innerHTML;
-                        const textarea = document.createElement('textarea');
-                        textarea.value = currentValue.replace(/<br>/g, '\n');
-                        textarea.style.width = '100%';
-                        textarea.style.height = '60px';
-                        
-                        cell.innerHTML = '';
-                        cell.appendChild(textarea);
-                    }
-                });
-            });
-
-            const saveButton = document.createElement('button');
-            saveButton.textContent = 'Save Schedule Changes';
-            saveButton.className = 'save-changes';
-            saveButton.onclick = () => {
-                rows.forEach(row => {
-                    const cells = row.querySelectorAll('td');
-                    cells.forEach((cell, cellIndex) => {
-                        if (cellIndex > 0) {
-                            const textarea = cell.querySelector('textarea');
-                            if (textarea) {
-                                cell.innerHTML = textarea.value.replace(/\n/g, '<br>');
-                            }
-                        }
-                    });
-                });
-                syllabusData['schedule'] = 'updated';
-                console.log('Schedule updated');
-                element.removeChild(saveButton);
-            };
-
-            element.appendChild(saveButton);
-        }
-
-        function editGradeDistribution(element) {
-            const gradeItems = element.querySelectorAll('.grade-item');
-            gradeItems.forEach(item => {
-                const percentage = item.querySelector('.percentage');
-                const description = item.querySelector('p');
-                
-                const currentPercentage = percentage.textContent.replace('%', '');
-                const currentDescription = description.textContent;
-
-                // Create percentage input
-                const percentageInput = document.createElement('input');
-                percentageInput.type = 'number';
-                percentageInput.value = currentPercentage;
-                percentageInput.min = '0';
-                percentageInput.max = '100';
-                percentageInput.style.width = '80px';
-                percentageInput.style.fontSize = '1.5rem';
-                percentageInput.style.textAlign = 'center';
-
-                // Create description input
-                const descriptionInput = document.createElement('input');
-                descriptionInput.type = 'text';
-                descriptionInput.value = currentDescription.replace(/[()]/g, '');
-                descriptionInput.style.width = '100%';
-
-                percentage.innerHTML = '';
-                percentage.appendChild(percentageInput);
-                percentage.appendChild(document.createTextNode('%'));
-
-                description.innerHTML = '(';
-                description.appendChild(descriptionInput);
-                description.appendChild(document.createTextNode(')'));
-            });
-
-            const saveButton = document.createElement('button');
-            saveButton.textContent = 'Save Grade Distribution';
-            saveButton.className = 'save-changes';
-            saveButton.onclick = () => {
-                gradeItems.forEach(item => {
-                    const percentageInput = item.querySelector('input[type="number"]');
-                    const descriptionInput = item.querySelector('input[type="text"]');
-                    const percentage = item.querySelector('.percentage');
-                    const description = item.querySelector('p');
-
-                    if (percentageInput && descriptionInput) {
-                        percentage.innerHTML = `<div class="percentage">${percentageInput.value}%</div>`;
-                        description.textContent = `(${descriptionInput.value})`;
-                    }
-                });
-                syllabusData['gradeDistribution'] = 'updated';
-                console.log('Grade distribution updated');
-                element.removeChild(saveButton);
-            };
-
-            element.appendChild(saveButton);
-        }
-
-        function editAssignmentPolicies(element) {
-            const content = element.innerHTML;
-            const textarea = document.createElement('textarea');
-            textarea.value = content.replace(/<[^>]*>/g, '').replace(/\n\s+/g, '\n');
-            textarea.style.width = '100%';
-            textarea.style.height = '200px';
-
-            element.innerHTML = '';
-            element.appendChild(textarea);
-
-            const saveButton = document.createElement('button');
-            saveButton.textContent = 'Save Assignment Policies';
-            saveButton.className = 'save-changes';
-            saveButton.onclick = () => {
-                const lines = textarea.value.split('\n').filter(line => line.trim());
-                let html = '<h3>Assignment Policies</h3><ul style="margin-left: 1.5rem; margin-top: 1rem;">';
-                
-                lines.forEach(line => {
-                    if (line.trim() && !line.includes('Assignment Policies')) {
-                        html += `<li>${line.trim()}</li>`;
-                    }
-                });
-                
-                html += '</ul>';
-                element.innerHTML = html;
-                syllabusData['assignmentPolicies'] = textarea.value;
-                console.log('Assignment policies updated');
-            };
-
-            element.appendChild(saveButton);
-            textarea.focus();
-        }
-
-        // Export functionality
-        function exportSyllabusData() {
-            const dataStr = JSON.stringify(syllabusData, null, 2);
-            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
             
-            const exportFileDefaultName = 'lan153_syllabus_data.json';
+            // Close dropdown
+            const dropdown = document.querySelector('.dropdown-content');
+            dropdown.style.display = 'none';
             
-            const linkElement = document.createElement('a');
-            linkElement.setAttribute('href', dataUri);
-            linkElement.setAttribute('download', exportFileDefaultName);
-            linkElement.click();
+            // Scroll to top of content
+            window.scrollTo(0, 0);
         }
 
-        // Auto-save functionality (stores in localStorage)
-        function autoSave() {
-            if (Object.keys(syllabusData).length > 0) {
-                localStorage.setItem('lan153_syllabus_changes', JSON.stringify(syllabusData));
-                console.log('Auto-saved syllabus changes');
-            }
-        }
-
-        // Load saved changes on page load
-        function loadSavedChanges() {
-            const saved = localStorage.getItem('lan153_syllabus_changes');
-            if (saved) {
-                const savedData = JSON.parse(saved);
-                Object.assign(syllabusData, savedData);
-                console.log('Loaded saved changes:', savedData);
-                
-                // Apply saved changes to the page
-                Object.keys(savedData).forEach(field => {
-                    const element = document.querySelector(`[data-field="${field}"] .content`);
-                    if (element && typeof savedData[field] === 'string') {
-                        element.textContent = savedData[field];
-                    }
-                });
-            }
-        }
-
-        // Enhanced navigation with keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey || e.metaKey) {
-                switch(e.key) {
-                    case 'e':
-                        e.preventDefault();
-                        toggleEditMode();
-                        break;
-                    case 'p':
-                        e.preventDefault();
-                        window.print();
-                        break;
-                    case 's':
-                        if (editMode) {
-                            e.preventDefault();
-                            exportSyllabusData();
-                        }
-                        break;
-                }
-            }
+        // Handle instructor name editing
+        document.getElementById('instructor').addEventListener('input', function() {
+            const instructorName = this.value || 'Patti Ota';
+            document.getElementById('instructor-display').textContent = instructorName;
         });
 
-        // Auto-save every 30 seconds
-        setInterval(autoSave, 30000);
+        // Handle year editing
+        document.getElementById('year').addEventListener('input', function() {
+            const year = this.value || 'Fall 2025';
+            document.getElementById('year-display').textContent = year;
+        });
 
-        // Load saved changes when page loads
-        window.addEventListener('load', loadSavedChanges);
+        // Initialize default values
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('instructor-display').textContent = 'Patti Ota';
+            document.getElementById('year-display').textContent = 'Fall 2025';
+        });
 
-        // Add search functionality
-        function addSearchFunctionality() {
-            const searchContainer = document.createElement('div');
-            searchContainer.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: white;
-                padding: 10px;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                z-index: 1000;
-                display: none;
-            `;
-
-            const searchInput = document.createElement('input');
-            searchInput.type = 'text';
-            searchInput.placeholder = 'Search syllabus...';
-            searchInput.style.cssText = `
-                width: 200px;
-                padding: 8px;
-                border: 2px solid #4a7c23;
-                border-radius: 4px;
-            `;
-
-            searchContainer.appendChild(searchInput);
-            document.body.appendChild(searchContainer);
-
-            // Toggle search with Ctrl+F
-            document.addEventListener('keydown', function(e) {
-                if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
-                    e.preventDefault();
-                    searchContainer.style.display = searchContainer.style.display === 'none' ? 'block' : 'none';
-                    if (searchContainer.style.display === 'block') {
-                        searchInput.focus();
-                    }
-                }
-            });
-
-            // Search functionality
-            searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                const sections = document.querySelectorAll('.content-section');
-                
-                sections.forEach(section => {
-                    const text = section.textContent.toLowerCase();
-                    if (text.includes(searchTerm) || searchTerm === '') {
-                        section.style.display = 'block';
-                    } else {
-                        section.style.display = 'none';
-                    }
-                });
-            });
-        }
-
-        // Initialize search functionality
-        addSearchFunctionality();
-
-        console.log('LAN-153 Interactive Syllabus loaded successfully!');
-        console.log('Keyboard shortcuts:');
-        console.log('- Ctrl+E: Toggle edit mode');
-        console.log('- Ctrl+P: Print syllabus');
-        console.log('- Ctrl+S: Export data (in edit mode)');
-        console.log('- Ctrl+F: Search syllabus');
-        console.log('');
-        console.log('To download this page: Right-click → Save as → Web Page, Complete');
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.querySelector('.nav-dropdown');
+            if (!dropdown.contains(event.target)) {
+                document.querySelector('.dropdown-content').style.display = 'none';
+            }
+        });
     </script>
 </body>
-</html>SimpleField(element, field) {
-            const contentSpan = element.querySelector('.content');
-            if (!contentSpan) return;
-
-            const currentValue = contentSpan.textContent;
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.value = currentValue;
-            input.style.width = '100%';
-
-            contentSpan.innerHTML = '';
-            contentSpan.appendChild(input);
-
-            const saveButton = document.createElement('button');
-            saveButton.textContent = 'Save';
-            saveButton.className = 'save-changes';
-            saveButton.onclick = () => {
-                contentSpan.textContent = input.value;
-                syllabusData[field] = input.value;
-                console.log('Updated field:', field, 'with value:', input.value);
-            };
-
-            element.appendChild(saveButton);
-            input.focus();
-        }
-
-        function edit
+</html>
